@@ -1,0 +1,10 @@
+js/firebase-config.js
+data/store.json
+data/sessions.json
+cloudflare/config.yml
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+node_modules/
+.DS_Store

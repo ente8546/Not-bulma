@@ -1,0 +1,18 @@
+{
+  "name": "not-bulmaca",
+  "version": "1.0.0",
+  "description": "Not belirleme PWA - mini Node sunucusu",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "firewall": "powershell -ExecutionPolicy Bypass -File scripts/open-firewall.ps1",
+    "tunnel": "cloudflared tunnel --config cloudflare/config.yml run",
+    "start:public": "powershell -ExecutionPolicy Bypass -File scripts/start-with-tunnel.ps1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

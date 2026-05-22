@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="description" content="Admin paneli - not belirleme">
+  <title>Admin - Not Bulmaca</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Yönetim Paneli</h1>
+      <p>Not belirleme ve şifre yönetimi</p>
+    </header>
+
+    <div id="networkInfo" class="card network-card message info hidden"></div>
+
+    <div id="adminMessage" class="message hidden"></div>
+
+    <!-- Giriş -->
+    <section id="loginSection" class="card">
+      <h2>Giriş</h2>
+      <div id="setupHint" class="message info hidden">
+        İlk kurulum: Varsayılan şifre <strong>admin123</strong> ile giriş yapın, ardından şifrenizi değiştirin.
+      </div>
+      <label for="loginPassword">Şifre</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Admin şifresi">
+      <button type="button" class="btn btn-primary" id="loginBtn">Giriş yap</button>
+    </section>
+
+    <!-- Panel -->
+    <section id="panelSection" class="hidden">
+      <div class="card">
+        <h2>Sınav notu</h2>
+        <label for="gradeInput">Not (0–100)</label>
+        <input type="number" id="gradeInput" min="0" max="100" step="1" inputmode="numeric" placeholder="Örn: 85">
+        <button type="button" class="btn btn-primary" id="saveGradeBtn">Kaydet ve bulmaca oluştur</button>
+        <p id="currentGradeInfo" class="attempts-info"></p>
+      </div>
+
+      <div class="card">
+        <h2>Şifre değiştir</h2>
+        <label for="currentPassword">Mevcut şifre</label>
+        <input type="password" id="currentPassword" autocomplete="current-password">
+        <label for="newPassword">Yeni şifre</label>
+        <input type="password" id="newPassword" autocomplete="new-password" minlength="4">
+        <label for="confirmPassword">Yeni şifre (tekrar)</label>
+        <input type="password" id="confirmPassword" autocomplete="new-password" minlength="4">
+        <button type="button" class="btn btn-secondary" id="changePasswordBtn">Şifreyi güncelle</button>
+      </div>
+
+      <button type="button" class="btn btn-danger" id="logoutBtn">Çıkış</button>
+    </section>
+
+    <div class="admin-link">
+      <a href="index.html">← Kullanıcı sayfası</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin-app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>
