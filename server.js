@@ -16,6 +16,11 @@ const SESSION_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 const app = express();
 app.use(express.json());
 
+app.use("/api", (_req, res, next) => {
+  res.setHeader("Cache-Control", "no-store");
+  next();
+});
+
 function getLocalIPv4Addresses() {
   const ips = [];
   const nets = os.networkInterfaces();

@@ -1,4 +1,4 @@
-const CACHE_NAME = "not-bulmaca-v1";
+const CACHE_NAME = "not-bulmaca-v2";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
@@ -9,7 +9,7 @@ const STATIC_ASSETS = [
   "./icons/icon-512.png",
   "./js/crypto.js",
   "./js/puzzle-generator.js",
-  "./js/firebase-init.js",
+  "./js/api-init.js",
   "./js/user-app.js",
   "./js/admin-app.js",
   "./js/network-info.js",
@@ -36,16 +36,13 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  if (
-    url.hostname.includes("googleapis.com") ||
-    url.hostname.includes("firebaseio.com") ||
-    url.hostname.includes("firebaseapp.com") ||
-    url.hostname.includes("gstatic.com")
-  ) {
+  if (event.request.method !== "GET") return;
+  if (url.origin !== self.location.origin) return;
+
+  if (url.pathname.startsWith("/api/")) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
     return;
   }
-
-  if (event.request.method !== "GET") return;
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
